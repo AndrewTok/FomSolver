@@ -23,7 +23,7 @@ def convert_Joule_To_eV(J):
 
 def get_N(m, T):
     # m - кг
-    root = 2*np.pi*m*k*T/(Constants.h)**2
+    root = 2*np.pi*m*Constants.k*T/(Constants.h)**2
     return 2*np.power(root, 3./2.)
 
 def get_n(m, Ec, Ef, T):
@@ -62,13 +62,13 @@ def erg_to_Ev(erg):
     return erg*6.24*1e11
 
 def get_Wn(Na, Nd, eps, delta_Ef):
-    return np.sqrt(2*eps*Constants.eps0*delta_Ef*Na/(e*Nd*(Na + Nd)))
+    return np.sqrt(2*eps*Constants.eps0*delta_Ef*Na/(Constants.e*Nd*(Na + Nd)))
 
 def get_Wp(Na, Nd, eps, delta_Ef):
-    return np.sqrt(2*eps*Constants.eps0*delta_Ef*Nd/(e*Na*(Na + Nd)))
+    return np.sqrt(2*eps*Constants.eps0*delta_Ef*Nd/(Constants.e*Na*(Na + Nd)))
 
 def get_ni(Nc, Nv, Eg, T):
-    return np.sqrt(Nc*Nv)*np.exp(-Eg/(2*convert_Joule_To_eV(k*T)))
+    return np.sqrt(Nc*Nv)*np.exp(-Eg/(2*convert_Joule_To_eV(Constants.k*T)))
 
 def get_pn0(Nd, ni):
     return ni**2/Nd
