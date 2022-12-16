@@ -93,11 +93,47 @@ def get_Vp(Nd, a, eps):
 def get_Ip(Nd, z, mobility, a, eps, L):
     return z*mobility*Constants.e**2*Nd**2*a**3/(6*eps*Constants.eps0*L)
 
-def plot_VAC(Vg, Vp, Ip):
-    Ud = np.linspace(0, Vp, 1000)
+
+
+def get_VAC_data(Vg, Vp, Ip):
+    Ud = np.linspace(0,Vp, 1000)
     Id_arr = [get_Id(u, Vg, Vp, Ip) for u in Ud]
+
+    return Ud, Id_arr
+
+def plot_VAC_data(Ud, Id_arr):
+    max_id = np.argmax(Id_arr)
     plt.grid()
-    plt.plot(Id_arr, Ud)
+    plt.plot(Ud[:max_id], Id_arr[:max_id])
     plt.xlabel("V")
     plt.ylabel("I")
+    plt.show()
+
+def plot_VAC(Vg, Vp, Ip):
+
+    Ud, Id_arr = get_VAC_data(Vg, Vp, Ip)
+    plot_VAC_data(Ud, Id_arr)
+
+def flush_Id_arr(Id_arr):
+    max = np.max(Id_arr)
+    max_id = np.argmax(Id_arr)
+
+    tmp =  np.ones_like(Id_arr)*max
+    Id_arr[max_id:] =tmp[max_id:]
+
+
+def plot_VAC_together(Ud, Id_arr_1, label1, Id_arr_2, label2):
+    
+
+    flush_Id_arr(Id_arr_1)
+    flush_Id_arr(Id_arr_2)
+    
+
+    plt.grid()
+    plt.plot(Ud, Id_arr_1, label = label1)
+    plt.plot(Ud, Id_arr_2, label = label2)
+    plt.plot()
+    plt.xlabel("V")
+    plt.ylabel("I")
+    plt.legend()
     plt.show()
