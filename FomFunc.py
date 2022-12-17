@@ -76,8 +76,8 @@ def get_pn0(Nd, ni):
 def get_np0(Na, ni):
     return ni**2/Na
 
-def get_J0(Dp, pn0, alpha_p, Dn, np0, alpha_n):
-    return Constants.e*(Dp*pn0/alpha_p + Dn*np0/alpha_n)
+def get_J0(Dp, pn0, alpha_p, Dn, np0, alpha_n, S):
+    return Constants.e*(Dp*pn0/alpha_p + Dn*np0/alpha_n)*S
 
 def get_D(diff_length, tau):
     return diff_length**2/tau
